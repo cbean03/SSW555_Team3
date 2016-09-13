@@ -1,7 +1,7 @@
 #Carly Bean
 #This program shall read and print data from a GEDCOM file
 
-file = "Project02GEDCOMFIle_CBean.ged"
+file = "GEDCOMFile.ged"
 validTags = ['INDI','NAME','SEX','BIRT','DEAT','FAMC','FAMS','FAM','MARR','HUSB','WIFE','CHIL','DIV','DATE','HEAD','TRLR','NOTE']
 
 with open(file) as f:
