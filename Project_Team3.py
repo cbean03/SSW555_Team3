@@ -77,6 +77,12 @@ if L1[0][0] == 'I':
 elif L1[0][0] == 'F':
 	families = families + [L1]
 
+#sort people lists by individual ID (the first element of each individual's list)
+people = sorted(people, key = lambda indi:indi[0])
+
+#sort families by family ID (the first element of each faily's list)
+families = sorted(families, key = lambda fam:fam[0])
+
 #loop reads people array and then arrays within people arrays and prints
 print ('People List:')
 for i in people:
