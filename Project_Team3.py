@@ -78,22 +78,27 @@ elif L1[0][0] == 'F':
 	families = families + [L1]
 
 #sort people lists by individual ID (the first element of each individual's list)
-people = sorted(people, key = lambda indi:indi[0])
+people = sorted(people, key = lambda indi:int(indi[0][1:]))
 
 #sort families by family ID (the first element of each faily's list)
-families = sorted(families, key = lambda fam:fam[0])
+families = sorted(families, key = lambda fam:int(fam[0][1:]))
 
 #loop reads people array and then arrays within people arrays and prints
 print ('People List:')
 for i in people:
-        for j in i:
-                print(i)
+        print i[0], ':', i[1][5:]
 
-#loop reads familes array and then arrays within families arrays and prints                
+#loop reads families array and then arrays within families arrays and prints                
 print ('')
 print ('Families List:')
 for i in families:
+	record_to_print = i[0] + ':'
         for j in i:
-                print(i)
+        	fam_item = j.split()
+        	if fam_item[0] in ['HUSB','WIFE']:
+        		for person in people:
+        			if person[0] == fam_item[1]:
+        				record_to_print = record_to_print + ' ' + fam_item[1] + ' ' + person[1][5:]
+	print record_to_print
 
 	
