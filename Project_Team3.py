@@ -86,7 +86,7 @@ families = sorted(families, key = lambda fam:int(fam[0][1:]))
 #loop reads people array and then arrays within people arrays and prints
 print ('People List:')
 for i in people:
-        print i[0], ':', i[1][5:]
+        print i[0] + ': ' + i[1][5:]
 
 #loop reads families array and then arrays within families arrays and prints                
 print ('')
