@@ -103,6 +103,10 @@ class Individual:
 		if(isAfterDate(birth_date, today)):
 			print "ERROR: User story 1 - Birthday " + str(birth_date) + " for individual " + self.id + " after today's date"
 		#END: US01
+		#BEGIN: US03 - Birth before death
+		if(isAfterDate(birth_date, self.death)):
+			print "ERROR: User story 3 - Birthday " + str(birth_date) + " for individual " + self.id + " after individual's death date"
+		#END: US03
 		else:
 			self.birthday = birth_date
 		
@@ -112,6 +116,10 @@ class Individual:
 		if(isAfterDate(death_date, today)):
 			print "ERROR: User story 1 - Death Date " + str(death_date) + " for individual " + self.id + " after today's date"
 		#END: US01
+		#BEGIN: US03 - Birth before death
+		if(isAfterDate(self.birthday, death_date)):
+			print "ERROR: User story 3 - Death date " + str(death_date) + " for individual " + self.id + " before individual's birth date "
+		#END: US03
 		else:
 			self.death = death_date
 		
@@ -232,4 +240,6 @@ def readGEDCOM(filename):
 readGEDCOM('GEDCOMFile.ged')
 readGEDCOM('gedcom_test_files/us05.ged')
 readGEDCOM('gedcom_test_files/us01.ged')
+readGEDCOM('gedcom_test_files/us03.ged')
+
 
