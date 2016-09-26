@@ -45,11 +45,21 @@ class Family:
 		if(isAfterDate(marriage_date, self.husband.death) or isAfterDate(marriage_date, self.wife.death)):
 			print "ERROR: User story 5 - Marriage date " + str(marriage_date) + " for family " + self.id + " after death of spouse"
 		#END: US05
+		#BEGIN: US01 - Dates before current date
+		if(isAfterDate(marriage_date, today)):
+			print "ERROR: User story 1 - Marriage date " + str(marriage_date) + " for family " + self.id + " after today's date"
+		#END: US01
 		else:
 			self.married = marriage_date
 		
 	def addDivorced(self, date):
-		self.divorced = datetime.datetime.strptime(" ".join(date), '%d %b %Y').date()
+		divorce_date = datetime.datetime.strptime(" ".join(date), '%d %b %Y').date()
+		#BEGIN: US01 - Dates before current date
+		if(isAfterDate(divorce_date, today)):
+			print "ERROR: User story 1 - Divorce date " + str(divorce_date) + " for family " + self.id + " after today's date"
+		#END: US01
+		else:
+			self.divorced = divorce_date
 		
 	def numMembers(self):
 		return Family.members
@@ -88,10 +98,22 @@ class Individual:
 		self.sex = sex
 		
 	def addBirthday(self, date):
-		self.birthday = datetime.datetime.strptime(" ".join(date), '%d %b %Y').date()
+		birth_date = datetime.datetime.strptime(" ".join(date), '%d %b %Y').date()
+		#BEGIN: US01 - Dates before current date
+		if(isAfterDate(birth_date, today)):
+			print "ERROR: User story 1 - Birthday " + str(birth_date) + " for individual " + self.id + " after today's date"
+		#END: US01
+		else:
+			self.birthday = birth_date
 		
 	def addDeath(self, date):
-		self.death = datetime.datetime.strptime(" ".join(date), '%d %b %Y').date()
+		death_date = datetime.datetime.strptime(" ".join(date), '%d %b %Y').date()
+		#BEGIN: US01 - Dates before current date
+		if(isAfterDate(death_date, today)):
+			print "ERROR: User story 1 - Death Date " + str(death_date) + " for individual " + self.id + " after today's date"
+		#END: US01
+		else:
+			self.death = death_date
 		
 	def addFamc(self, famc):
 		self.famc = famc
@@ -208,4 +230,6 @@ def readGEDCOM(filename):
 	print
 
 readGEDCOM('GEDCOMFile.ged')
-readGEDCOM('gedcom_test_files\us05.ged')
+readGEDCOM('gedcom_test_files/us05.ged')
+readGEDCOM('gedcom_test_files/us01.ged')
+
