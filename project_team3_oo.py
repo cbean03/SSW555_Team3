@@ -28,12 +28,24 @@ class Family:
         self.children = []
     
     def addHusband(self, husb):
-        self.husband = husb
-        Family.members += 1
+        #BEGIN: US11 - No bigamy
+        if Family.members > 1:
+            print "ERROR: User story 11 - A husband in family " + self.id + " is married to wife but was not divorced first."
+            self.husband = husb
+        #End: US11 - No bigamy
+        else:
+            self.husband = husb
+            Family.members += 1
         
     def addWife(self, wife):
-        self.wife = wife
-        Family.members += 1
+        #BEGIN: US11 - No bigamy
+        if Family.members > 1:
+            print "ERROR: User story 11 - A wife in family " + self.id + " is married to wife but was not divorced first."
+            self.wife = wife
+        #End: US11 - No bigamy
+        else:
+            self.wife = wife
+            Family.members += 1
         
     def addChild(self, child):
         self.children.append(child)
