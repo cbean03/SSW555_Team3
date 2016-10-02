@@ -271,10 +271,11 @@ def readGEDCOM(filename):
     print
     
 
+readGEDCOM('gedcom_test_files/all_us_sprint1.ged')
         
-readGEDCOM('GEDCOMFile.ged')
-readGEDCOM('gedcom_test_files/us01.ged')
-readGEDCOM('gedcom_test_files/us03.ged')
-readGEDCOM('gedcom_test_files/us05.ged')
-readGEDCOM('gedcom_test_files/us09.ged')
-readGEDCOM('gedcom_test_files/us11.ged')
+#readGEDCOM('GEDCOMFile.ged')
+#readGEDCOM('gedcom_test_files/us01.ged')
+#readGEDCOM('gedcom_test_files/us03.ged')
+#readGEDCOM('gedcom_test_files/us05.ged')
+#readGEDCOM('gedcom_test_files/us09.ged')
+#readGEDCOM('gedcom_test_files/us11.ged')
