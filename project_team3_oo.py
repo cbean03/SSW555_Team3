@@ -51,6 +51,25 @@ class Family:
         self.children.append(child)
         Family.members += 1
 
+        #BEGIN: US13 - Sibling Spacing
+        for child in self.children:
+            for child1 in self.children:
+                if child is child1:
+                    pass
+                elif child is not child1 and bdayDiff(child.birthday, child1.birthday) is True:
+                    print "ERROR: User Story 13 - Sibling birthdays are between 2 days and 8 months apart."
+                else:
+                    pass
+        #END: US13
+        
+        #BEGIN: US15 - Fewer than 15 siblings
+        if len(self.children) >= 15:
+                    print "ERROR: User story 15 -Family should have fewer than 15 siblings"
+                    print "Number of Children: " + str(len(self.children))
+        else:
+            pass
+        #END: US15
+
     def addMarried(self, date):
         marriage_date = datetime.datetime.strptime(" ".join(date), '%d %b %Y').date()
         #BEGIN: US05 - Marriage before death
@@ -91,14 +110,19 @@ class Family:
                     print child.name + ","
                 else:
                     print child.name
-                #BEGIN: US15 - Fewer than 15 siblings
-                if len(self.children) >= 15:
-                    print "ERROR: User story 15 -Family should have fewer than 15 siblings"
-                    print "Number of Children: " + str(len(self.children))
-                else:
-                    pass
-                    
-                #END: US15
+
+#Function to evaluate if the distance between sibling's birthdays is between 2 days and 8 months
+def bdayDiff(bday1, bday2):
+    """Function:     bdayDiff
+	   Purpose:      Returns whether bday1 is between 2 days and 8 months from bday2
+	   Parameters:   bday1 - datetime.date object | bday2 - datetime.date object
+	   Return value: Boolean
+	"""
+    bdaySub = (bday1 - bday2).days
+    if (bdaySub > 2) and (bdaySub < 240):
+        return True
+    else:
+        return False
         
 #Class for holding individual information
 class Individual:
@@ -167,6 +191,8 @@ def isAfterDate(date1, date2):
         return date1 > date2
     else:
         return False
+
+
 
 def readGEDCOM(filename):
     curr_indi = ''
@@ -287,4 +313,5 @@ readGEDCOM('gedcom_test_files/us03.ged')
 readGEDCOM('gedcom_test_files/us05.ged')
 readGEDCOM('gedcom_test_files/us09.ged')
 readGEDCOM('gedcom_test_files/us11.ged')
-readGEDCOM('gedcom_test_files/us13_15.ged')
+readGEDCOM('gedcom_test_files/us13.ged')
+readGEDCOM('gedcom_test_files/us15.ged')
