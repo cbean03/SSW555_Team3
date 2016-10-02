@@ -287,7 +287,7 @@ def readGEDCOM(filename):
                 if families[fam].wife.death is not None:  # If the wife is not dead, skip.
                     if child.birthday is not None: #If the child does not have a birthday, skip.
                         if child.birthday > families[fam].wife.death: #If the child is not born before mother's death, skip.
-                            print "ERROR: User Story 9: Child born before mother's death.  Dead mother:",families[fam].wife.name,"  Child:",child.name
+                            print "ERROR: User Story 9: Child born after mother's death.  Dead mother:",families[fam].wife.name,"  Child:",child.name
                         else:
                             continue
                     else:
