@@ -321,7 +321,7 @@ def readGEDCOM(filename):
     print
     
 
-readGEDCOM('gedcom_test_files/all_us_sprint1.ged')
+readGEDCOM('gedcom_test_files/all_us_sprint1_edit.ged')
         
 #readGEDCOM('GEDCOMFile.ged')
 #readGEDCOM('gedcom_test_files/us01.ged')
