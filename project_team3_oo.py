@@ -91,7 +91,6 @@ class Family:
                     print child.name + ","
                 else:
                     print child.name
-                ########################################################
                 #BEGIN: US15 - Fewer than 15 siblings
                 if len(self.children) >= 15:
                     print "ERROR: User story 15 -Family should have fewer than 15 siblings"
@@ -100,7 +99,6 @@ class Family:
                     pass
                     
                 #END: US15
-                ########################################################
         
 #Class for holding individual information
 class Individual:
@@ -281,6 +279,7 @@ def readGEDCOM(filename):
     print
     
 
+readGEDCOM('gedcom_test_files/all_us_sprint1.ged')
         
 readGEDCOM('GEDCOMFile.ged')
 readGEDCOM('gedcom_test_files/us01.ged')
