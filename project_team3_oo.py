@@ -80,8 +80,7 @@ class Family:
         if(isAfterDate(marriage_date, today)):
             print "ERROR: User story 1 - Marriage date " + str(marriage_date) + " for family " + self.id + " after today's date"
         #END: US01
-        else:
-            self.married = marriage_date
+        self.married = marriage_date
         
     def addDivorced(self, date):
         divorce_date = datetime.datetime.strptime(" ".join(date), '%d %b %Y').date()
@@ -89,8 +88,7 @@ class Family:
         if(isAfterDate(divorce_date, today)):
             print "ERROR: User story 1 - Divorce date " + str(divorce_date) + " for family " + self.id + " after today's date"
         #END: US01
-        else:
-            self.divorced = divorce_date
+        self.divorced = divorce_date
         
     def numMembers(self):
         return Family.members
@@ -99,8 +97,14 @@ class Family:
         print self.id
         print "Married: " + str(self.married)
         print "Divorced: " + str(self.divorced)
-        print "Husband: " + self.husband.name
-        print "Wife: " + self.wife.name
+        if self.husband:
+            print "Husband: " + self.husband.name
+        else:
+            print "Husband: None"
+        if self.wife:
+            print "Wife: " + self.wife.name
+        else:
+            print "Wife: None"
         print "Children:",
         if self.children == []:
             print "None"
@@ -151,8 +155,8 @@ class Individual:
         if(isAfterDate(birth_date, self.death)):
             print "ERROR: User story 3 - Birthday " + str(birth_date) + " for individual " + self.id + " after individual's death date"
         #END: US03
-        else:
-            self.birthday = birth_date
+
+        self.birthday = birth_date
         
     def addDeath(self, date):
         death_date = datetime.datetime.strptime(" ".join(date), '%d %b %Y').date()
@@ -164,8 +168,8 @@ class Individual:
         if(isAfterDate(self.birthday, death_date)):
             print "ERROR: User story 3 - Death date " + str(death_date) + " for individual " + self.id + " before individual's birth date "
         #END: US03
-        else:
-            self.death = death_date
+
+        self.death = death_date
         
     def addFamc(self, famc):
         self.famc = famc
@@ -273,22 +277,34 @@ def readGEDCOM(filename):
     for fam in families: #Finding keys in dictionary.  Go throught the family first... Then go through the child list.
         for child in families[fam].children: #Use key to get family... next look at the family.
             delta = datetime.timedelta(days=(9 * 30)) #9 months times 30 days.
-            if families[fam].husband.death is not None: #If the husband didn't die, skip.
-                if child.birthday > families[fam].husband.death - delta:
-                    print "ERROR: User Story 9: Child born less than 9 months after father's death.  Dead father:",families[fam].husband.name,"  Child:",child.name
-                else:
-                    continue
-            if families[fam].wife.death is not None:  # If the wife is not dead, skip.
-                if child.birthday is not None: #If the child does not have a birthday, skip.
-                    if child.birthday > families[fam].wife.death: #If the child is not born before mother's death, skip.
-                        print "ERROR: User Story 9: Child born before mother's death.  Dead mother:",families[fam].wife.name,"  Child:",child.name
+            if families[fam].husband:
+                if families[fam].husband.death is not None: #If the husband didn't die, skip.
+                    if child.birthday > families[fam].husband.death - delta:
+                        print "ERROR: User Story 9: Child born less than 9 months after father's death.  Dead father:",families[fam].husband.name,"  Child:",child.name
+                    else:
+                        continue
+            if families[fam].wife:
+                if families[fam].wife.death is not None:  # If the wife is not dead, skip.
+                    if child.birthday is not None: #If the child does not have a birthday, skip.
+                        if child.birthday > families[fam].wife.death: #If the child is not born before mother's death, skip.
+                            print "ERROR: User Story 9: Child born before mother's death.  Dead mother:",families[fam].wife.name,"  Child:",child.name
+                        else:
+                            continue
                     else:
                         continue
                 else:
-                    continue
-            else:
-                continue   
+                    continue   
     #END: US09
+
+    #BEGIN: US07 - Less than 150 years old
+    for indi in individuals:
+        if individuals[indi].death:
+            if((individuals[indi].death - datetime.timedelta(days=150*365) >= individuals[indi].birthday)):
+                print "ERROR: User story 7 - Birthday " + str(individuals[indi].birthday) + " and death date " + str(individuals[indi].death) + " for individual " + individuals[indi].id + " makes them over 150 years old"
+        elif individuals[indi].birthday:
+            if(individuals[indi].birthday <= (today - datetime.timedelta(days=150*365))):
+                print "ERROR: User story 7 - Birthday " + str(individuals[indi].birthday) + " and no death date for individual " + individuals[indi].id + " makes them over 150 years old"
+    #END: US07
 
     #Print out all loaded information for troubleshooting
     sorted_keys = natural_sort(individuals)
@@ -307,11 +323,12 @@ def readGEDCOM(filename):
 
 readGEDCOM('gedcom_test_files/all_us_sprint1.ged')
         
-readGEDCOM('GEDCOMFile.ged')
-readGEDCOM('gedcom_test_files/us01.ged')
-readGEDCOM('gedcom_test_files/us03.ged')
-readGEDCOM('gedcom_test_files/us05.ged')
-readGEDCOM('gedcom_test_files/us09.ged')
-readGEDCOM('gedcom_test_files/us11.ged')
-readGEDCOM('gedcom_test_files/us13.ged')
-readGEDCOM('gedcom_test_files/us15.ged')
+#readGEDCOM('GEDCOMFile.ged')
+#readGEDCOM('gedcom_test_files/us01.ged')
+#readGEDCOM('gedcom_test_files/us03.ged')
+#readGEDCOM('gedcom_test_files/us05.ged')
+#readGEDCOM('gedcom_test_files/us09.ged')
+#readGEDCOM('gedcom_test_files/us11.ged')
+#readGEDCOM('gedcom_test_files/us13.ged')
+#readGEDCOM('gedcom_test_files/us15.ged')
+#readGEDCOM('gedcom_test_files/us07.ged')
