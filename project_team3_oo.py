@@ -306,6 +306,14 @@ def readGEDCOM(filename):
                 print "ERROR: User story 7 - Birthday " + str(individuals[indi].birthday) + " and no death date for individual " + individuals[indi].id + " makes them over 150 years old"
     #END: US07
 
+    #Begin: US17 - No marrages to decendants
+    for indi in individuals:
+        if individuals[indi].famc == individuals[indi].fams:
+            print "ERROR: User story 17 - The decendant ", individuals[indi].name, "is a spouse in the family ", individuals[indi].fams
+        else:
+            continue
+    #END: US17
+
     #Print out all loaded information for troubleshooting
     sorted_keys = natural_sort(individuals)
     for i in sorted_keys:
