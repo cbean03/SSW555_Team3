@@ -314,6 +314,16 @@ def readGEDCOM(filename):
             continue
     #END: US17
 
+    #BEGIN: US21 - Correct gender for role
+    for fam in families:
+        if families[fam].husband.sex != "M":
+            print families[fam].husband.name, " has the wrong gender for role.  Husband is ", families[fam].husband.sex,"emale." 
+        if families[fam].wife.sex != "F":
+            print families[fam].wife.name, " has the wrong gender for role.  Wife is ", families[fam].wife.sex,"ale." 
+        else:
+            continue
+    #END: US21
+
     #Print out all loaded information for troubleshooting
     sorted_keys = natural_sort(individuals)
     for i in sorted_keys:
