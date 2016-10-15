@@ -24,31 +24,39 @@ class Family:
         self.married = None
         self.divorced = None
         self.husband = None
+        self.husbandID = None
         self.wife = None
+        self.wifeID = None
         self.children = []
+        self.childrenIDs= []
     
-    def addHusband(self, husb):
+    def addHusband(self, husb, ID):
         #BEGIN: US11 - No bigamy
         if Family.members > 1:
             print "ERROR: User story 11 - A husband in family " + self.id + " is married to wife but was not divorced first."
             self.husband = husb
+            self.husbandID = ID
         #End: US11 - No bigamy
         else:
             self.husband = husb
+            self.husbandID = ID
             Family.members += 1
         
-    def addWife(self, wife):
+    def addWife(self, wife, ID):
         #BEGIN: US11 - No bigamy
         if Family.members > 1:
             print "ERROR: User story 11 - A wife in family " + self.id + " is married to wife but was not divorced first."
             self.wife = wife
+            self.wifeID = ID
         #End: US11 - No bigamy
         else:
             self.wife = wife
+            self.wifeID = ID
             Family.members += 1
         
-    def addChild(self, child):
+    def addChild(self, child, ID):
         self.children.append(child)
+        self.childrenIDs.append(ID)
         Family.members += 1
 
         #BEGIN: US13 - Sibling Spacing
@@ -246,11 +254,11 @@ def readGEDCOM(filename):
                         individuals[curr_indi].addFams(parts[2].replace("@",""))
                 elif parts[1] in tags1 and curr_fam != '':
                     if parts[1] == 'HUSB':
-                        families[curr_fam].addHusband(individuals[parts[2].replace("@","")])
+                        families[curr_fam].addHusband(individuals[parts[2].replace("@","")], parts[2].replace("@",""))
                     elif parts[1] == 'WIFE':
-                        families[curr_fam].addWife(individuals[parts[2].replace("@","")])
+                        families[curr_fam].addWife(individuals[parts[2].replace("@","")], parts[2].replace("@",""))
                     elif parts[1] == 'CHIL':
-                        families[curr_fam].addChild(individuals[parts[2].replace("@","")])
+                        families[curr_fam].addChild(individuals[parts[2].replace("@","")], parts[2].replace("@",""))
                     elif parts[1] == 'MARR':
                         marr_flag = 1
                     elif parts[1] == 'DIV':
@@ -337,7 +345,6 @@ def readGEDCOM(filename):
         print
     print "END: " + filename
     print
-    
 
 readGEDCOM('gedcom_test_files/all_us_sprint1_edit.ged')
         
