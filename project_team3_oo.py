@@ -73,6 +73,15 @@ class Family:
             pass
         #END: US15
 
+        #BEGIN: US25 - Unique first names in families
+        for child1 in self.children:
+            for child2 in self.children:
+                if child1 is child2:
+                    continue
+                elif child1.name.partition(' ')[0] == child2.name.partition(' ')[0] and child1.birthday == child2.birthday:
+                    print "ERROR: User story 25 - child " + child1.id + " and child " + child2.id + " share the same first name and birthday."
+        #END: US25
+
     def addMarried(self, date):
         marriage_date = datetime.datetime.strptime(" ".join(date), '%d %b %Y').date()
         #BEGIN: US05 - Marriage before death
@@ -114,7 +123,7 @@ class Family:
         else:
             for child in self.children:
                 if child != self.children[-1]:
-                    print child.name + ","
+                    print child.name + ",",
                 else:
                     print child.name
 
@@ -194,7 +203,11 @@ class Individual:
         print "Death: " + str(self.death)
         print "Child of family: " + self.famc
         print "Spouse of family: " + self.fams
-        
+
+        #BEGIN: US27 - Include individual ages
+        print "Age: " + str(age(self.birthday, self.death))
+        #END: US27 - Include individual ages
+
     
 def isAfterDate(date1, date2):
     """Function:     isAfterDate
@@ -207,15 +220,28 @@ def isAfterDate(date1, date2):
     else:
         return False
 
-def ageINDI(bday):
-    """Function:     ageINDI
-       Purpose:      Returns age of individual in years
-       Parameters:   bday
-       Return value: int
+
+#def ageINDI(bday):
+#    """Function:     ageINDI
+#       Purpose:      Returns age of individual in years
+#       Parameters:   bday
+#       Return value: int
+#    """
+#    today = date.today()
+#    age = today.year - bday.year
+#    return age
+
+
+def age(birth, death):
+    """Function:     age
+       Purpose:      Returns the age of the person with provided birth and death dates.
+       Parameters:   birth - the birthday of the individual. death - the death date of the individual.
+       Return value: Integer (years)
     """
-    today = date.today()
-    age = today.year - bday.year
-    return age
+    if(death):
+        return death.year - birth.year - ((death.month, death.day) < (birth.month, birth.day))
+    else:
+        return today.year - birth.year - ((today.month, today.day) < (birth.month, birth.day))
 
 
 def readGEDCOM(filename):
@@ -334,12 +360,35 @@ def readGEDCOM(filename):
             continue
     #END: US17
 
+    #BEGIN: US19 - First cousins should not marry
+    for indi in individuals:
+        childOfFam = individuals[indi].famc
+        spouseOfFam = individuals[indi].fams
+        spouseParFam = ''
+        if childOfFam != '' and spouseOfFam != '':
+            indParFam = [families[childOfFam].husband.famc, families[childOfFam].wife.famc]
+            if individuals[indi].sex == "F":
+                try:
+                    spouseParFam = [families[families[spouseOfFam].husband.famc].husband.famc, families[families[spouseOfFam].husband.famc].wife.famc]
+                except KeyError:
+                    pass
+            else:
+                try:
+                    spouseParFam = [families[families[spouseOfFam].wife.famc].husband.famc, families[families[spouseOfFam].wife.famc].wife.famc]
+                except KeyError:
+                    pass
+            if len(list(set(filter(None,indParFam)).intersection(filter(None,spouseParFam)))) > 0:
+                print "ERROR: User story 19 - " + individuals[indi].name + " is married to first cousin "
+    #END: US19
+
     #BEGIN: US21 - Correct gender for role
     for fam in families:
-        if families[fam].husband.sex != "M":
-            print families[fam].husband.name, " has the wrong gender for role.  Husband is ", families[fam].husband.sex,"emale." 
-        if families[fam].wife.sex != "F":
-            print families[fam].wife.name, " has the wrong gender for role.  Wife is ", families[fam].wife.sex,"ale." 
+        if families[fam].husband:
+            if families[fam].husband.sex != "M":
+                print families[fam].husband.name, " has the wrong gender for role.  Husband is ", families[fam].husband.sex,"emale." 
+        if families[fam].wife:
+            if families[fam].wife.sex != "F":
+                print families[fam].wife.name, " has the wrong gender for role.  Wife is ", families[fam].wife.sex,"ale." 
         else:
             continue
     #END: US21
@@ -348,13 +397,23 @@ def readGEDCOM(filename):
     
     #Begin: US31 - Living Single
     for indi in individuals:
-        if individuals[indi].death is None and ageINDI(individuals[indi].birthday) > 30 and individuals[indi].fams == '':
+        if individuals[indi].death is None and age(individuals[indi].birthday, individuals[indi].death) > 30 and individuals[indi].fams == '':
             print "LIST: User Story 31 - Individual is Living / Single / Over Age 30: " + individuals[indi].name
         else:
             pass
     #END: US17
     
     
+
+    #BEGIN: US23 - Unique name and birth date
+    for indi in individuals:
+        for indi2 in individuals:
+            if indi2 is indi:
+                continue
+            elif individuals[indi].name == individuals[indi2].name and individuals[indi].birthday == individuals[indi2].birthday:
+                print "ERROR: User story 23 - Individual", individuals[indi].id, "and", individuals[indi2].id, "with birthday", individuals[indi].birthday, "appear twice"
+
+    #END: US23
 
     #Print out all loaded information for troubleshooting
     sorted_keys = natural_sort(individuals)
@@ -371,7 +430,8 @@ def readGEDCOM(filename):
     print
     
 
-#readGEDCOM('gedcom_test_files/all_us_sprint1_edit.ged')
+readGEDCOM('gedcom_test_files/all_us_sprint3.ged')
+
         
 #readGEDCOM('GEDCOMFile.ged')
 #readGEDCOM('gedcom_test_files/us01.ged')
@@ -384,4 +444,6 @@ def readGEDCOM(filename):
 #readGEDCOM('gedcom_test_files/us15.ged')
 #readGEDCOM('gedcom_test_files/us17.ged')
 #readGEDCOM('gedcom_test_files/us21.ged')
-readGEDCOM('gedcom_test_files/us31.ged')
+#readGEDCOM('gedcom_test_files/us25.ged')
+#readGEDCOM('gedcom_test_files/us31.ged')
+
