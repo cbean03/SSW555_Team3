@@ -353,7 +353,7 @@ def readGEDCOM(filename):
                 except KeyError:
                     pass
             if len(list(set(filter(None,indParFam)).intersection(filter(None,spouseParFam)))) > 0:
-                print "ERROR: User story 19 - " + individuals[indi].name + " is married to their first cousin "
+                print "ERROR: User story 19 - " + individuals[indi].name + " is married to first cousin "
     #END: US19
 
     #BEGIN: US21 - Correct gender for role
@@ -367,6 +367,16 @@ def readGEDCOM(filename):
         else:
             continue
     #END: US21
+
+    #BEGIN: US23 - Unique name and birth date
+    for indi in individuals:
+        for indi2 in individuals:
+            if indi2 is indi:
+                continue
+            elif individuals[indi].name == individuals[indi2].name and individuals[indi].birthday == individuals[indi2].birthday:
+                print "ERROR: User story 23 - Individual", individuals[indi].id, "and", individuals[indi2].id, "with birthday", individuals[indi].birthday, "appear twice"
+
+    #END: US23
 
     #Print out all loaded information for troubleshooting
     sorted_keys = natural_sort(individuals)
