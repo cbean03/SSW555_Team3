@@ -3,6 +3,9 @@
 #individuals and families in lists
 import datetime, re
 
+from datetime import date
+
+
 tags0_norm = ['HEAD', 'TRLR', 'NOTE']
 tags0_id = ['INDI', 'FAM']
 tags1 = ['NAME', 'SEX', 'BIRT', 'DEAT', 'FAMC', 'FAMS', 'MARR', 'HUSB', 'WIFE', 'CHIL', 'DIV']
@@ -158,6 +161,7 @@ class Individual:
 
         self.birthday = birth_date
         
+        
     def addDeath(self, date):
         death_date = datetime.datetime.strptime(" ".join(date), '%d %b %Y').date()
         #BEGIN: US01 - Dates before current date
@@ -168,7 +172,13 @@ class Individual:
         if(isAfterDate(self.birthday, death_date)):
             print "ERROR: User story 3 - Death date " + str(death_date) + " for individual " + self.id + " before individual's birth date "
         #END: US03
-
+        
+        #BEGIN: US29 - List all Deseased
+        if self.death != "None":
+            print "LIST: User Story 29 - The following individual is deceased: " + self.name
+        #END: US29
+        
+        
         self.death = death_date
         
     def addFamc(self, famc):
@@ -184,6 +194,7 @@ class Individual:
         print "Death: " + str(self.death)
         print "Child of family: " + self.famc
         print "Spouse of family: " + self.fams
+        
     
 def isAfterDate(date1, date2):
     """Function:     isAfterDate
@@ -196,6 +207,15 @@ def isAfterDate(date1, date2):
     else:
         return False
 
+def ageINDI(bday):
+    """Function:     ageINDI
+       Purpose:      Returns age of individual in years
+       Parameters:   bday
+       Return value: int
+    """
+    today = date.today()
+    age = today.year - bday.year
+    return age
 
 
 def readGEDCOM(filename):
@@ -323,6 +343,18 @@ def readGEDCOM(filename):
         else:
             continue
     #END: US21
+    
+    
+    
+    #Begin: US31 - Living Single
+    for indi in individuals:
+        if individuals[indi].death is None and ageINDI(individuals[indi].birthday) > 30 and individuals[indi].fams == '':
+            print "LIST: User Story 31 - Individual is Living / Single / Over Age 30: " + individuals[indi].name
+        else:
+            pass
+    #END: US17
+    
+    
 
     #Print out all loaded information for troubleshooting
     sorted_keys = natural_sort(individuals)
@@ -339,7 +371,7 @@ def readGEDCOM(filename):
     print
     
 
-readGEDCOM('gedcom_test_files/all_us_sprint1_edit.ged')
+#readGEDCOM('gedcom_test_files/all_us_sprint1_edit.ged')
         
 #readGEDCOM('GEDCOMFile.ged')
 #readGEDCOM('gedcom_test_files/us01.ged')
@@ -352,3 +384,4 @@ readGEDCOM('gedcom_test_files/all_us_sprint1_edit.ged')
 #readGEDCOM('gedcom_test_files/us15.ged')
 #readGEDCOM('gedcom_test_files/us17.ged')
 #readGEDCOM('gedcom_test_files/us21.ged')
+readGEDCOM('gedcom_test_files/us31.ged')
