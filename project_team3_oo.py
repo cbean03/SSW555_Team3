@@ -335,6 +335,27 @@ def readGEDCOM(filename):
             continue
     #END: US17
 
+    #BEGIN: US19 - First cousins should not marry
+    for indi in individuals:
+        childOfFam = individuals[indi].famc
+        spouseOfFam = individuals[indi].fams
+        spouseParFam = ''
+        if childOfFam != '' and spouseOfFam != '':
+            indParFam = [families[childOfFam].husband.famc, families[childOfFam].wife.famc]
+            if individuals[indi].sex == "F":
+                try:
+                    spouseParFam = [families[families[spouseOfFam].husband.famc].husband.famc, families[families[spouseOfFam].husband.famc].wife.famc]
+                except KeyError:
+                    pass
+            else:
+                try:
+                    spouseParFam = [families[families[spouseOfFam].wife.famc].husband.famc, families[families[spouseOfFam].wife.famc].wife.famc]
+                except KeyError:
+                    pass
+            if len(list(set(filter(None,indParFam)).intersection(filter(None,spouseParFam)))) > 0:
+                print "ERROR: User story 19 - " + individuals[indi].name + " is married to their first cousin "
+    #END: US19
+
     #BEGIN: US21 - Correct gender for role
     for fam in families:
         if families[fam].husband:
@@ -361,7 +382,6 @@ def readGEDCOM(filename):
     print "END: " + filename
     print
     
-
 readGEDCOM('gedcom_test_files/all_us_sprint1_edit.ged')
         
 #readGEDCOM('GEDCOMFile.ged')
