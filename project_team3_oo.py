@@ -67,8 +67,7 @@ class Family:
         
         #BEGIN: US15 - Fewer than 15 siblings
         if len(self.children) >= 15:
-                    print "ERROR: User story 15 -Family should have fewer than 15 siblings"
-                    print "Number of Children: " + str(len(self.children))
+                    print "ERROR: User story 15 - Family should have fewer than 15 siblings. Number of Children: " + str(len(self.children))
         else:
             pass
         #END: US15
@@ -326,14 +325,14 @@ def readGEDCOM(filename):
             if families[fam].husband:
                 if families[fam].husband.death is not None: #If the husband didn't die, skip.
                     if child.birthday > families[fam].husband.death - delta:
-                        print "ERROR: User Story 9: Child born less than 9 months after father's death.  Dead father:",families[fam].husband.name,"  Child:",child.name
+                        print "ERROR: User Story 9 - Child born less than 9 months after father's death.  Dead father:",families[fam].husband.name,"  Child:",child.name
                     else:
                         continue
             if families[fam].wife:
                 if families[fam].wife.death is not None:  # If the wife is not dead, skip.
                     if child.birthday is not None: #If the child does not have a birthday, skip.
                         if child.birthday > families[fam].wife.death: #If the child is not born before mother's death, skip.
-                            print "ERROR: User Story 9: Child born after mother's death.  Dead mother:",families[fam].wife.name,"  Child:",child.name
+                            print "ERROR: User Story 9 - Child born after mother's death.  Dead mother:",families[fam].wife.name,"  Child:",child.name
                         else:
                             continue
                     else:
@@ -385,10 +384,10 @@ def readGEDCOM(filename):
     for fam in families:
         if families[fam].husband:
             if families[fam].husband.sex != "M":
-                print families[fam].husband.name, " has the wrong gender for role.  Husband is ", families[fam].husband.sex,"emale." 
+                print "ERROR: User story 21 - ", families[fam].husband.name, " has the wrong gender for role.  Husband is ", families[fam].husband.sex,"emale." 
         if families[fam].wife:
             if families[fam].wife.sex != "F":
-                print families[fam].wife.name, " has the wrong gender for role.  Wife is ", families[fam].wife.sex,"ale." 
+                print "ERROR: User story 21 - ", families[fam].wife.name, " has the wrong gender for role.  Wife is ", families[fam].wife.sex,"ale." 
         else:
             continue
     #END: US21
