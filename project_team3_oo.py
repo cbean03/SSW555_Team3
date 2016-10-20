@@ -413,6 +413,21 @@ def readGEDCOM(filename):
                 print "ERROR: User story 23 - Individual", individuals[indi].id, "and", individuals[indi2].id, "with birthday", individuals[indi].birthday, "appear twice"
 
     #END: US23
+    
+    #BEGIN: US12 - Parents not too old
+    for fam in families:
+        wife = families[fam].wife
+        husband = families[fam].husband
+        children = families[fam].children
+        for child in children:
+            if (age(wife.birthday, wife.death) - age(child.birthday, child.death)) >= 60:
+                    print "ERROR: User story 12 - Mother:", wife.name, " is more than 60 years older than Child: ", child.name
+            elif age(husband.birthday, husband.death) -age(child.birthday, child.death) >= 80:
+                    print "ERROR: User story 12 - Father:", husband.name, " is more than 80 years older than Child: ", child.name 
+            else:
+                continue
+    #END: US12
+    
 
     #Print out all loaded information for troubleshooting
     sorted_keys = natural_sort(individuals)
