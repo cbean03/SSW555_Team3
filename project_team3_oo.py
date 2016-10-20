@@ -317,6 +317,28 @@ def readGEDCOM(filename):
                     elif div_flag == 1:
                         families[curr_fam].addDivorced(parts[2:])
                         div_flag = 0
+			
+    #BEGIN: US06 - Divorce before death
+    for fam in families:
+        if families[fam].divorced != None:
+            compare = families[fam].divorced
+            if families[fam].husband.death is not None: 
+                comph = families[fam].husband.death
+                if comph <= compare:
+                    print "ERROR: User Story 6 - Husband, ", families[fam].husband.name, " was divorced after death." 
+                else:
+                    print "NO."
+            if families[fam].wife.death is not None:
+                compw = families[fam].wife.death
+                if compw <= compare:
+                    print "ERROR: User Story 6 - Wife, ", families[fam].wife.name, "  was divorced after death." 
+                else:
+                    print "NO."
+            else:
+                continue
+        else:
+            continue   
+    #END: US06
 
     #BEGIN: US09 - Death before child brith
     for fam in families: #Finding keys in dictionary.  Go throught the family first... Then go through the child list.
@@ -436,6 +458,7 @@ readGEDCOM('gedcom_test_files/all_us_sprint3.ged')
 #readGEDCOM('gedcom_test_files/us01.ged')
 #readGEDCOM('gedcom_test_files/us03.ged')
 #readGEDCOM('gedcom_test_files/us05.ged')
+#readGEDCOM('gedcom_test_files/us06.ged')
 #readGEDCOM('gedcom_test_files/us07.ged')
 #readGEDCOM('gedcom_test_files/us09.ged')
 #readGEDCOM('gedcom_test_files/us11.ged')
