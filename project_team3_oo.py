@@ -64,6 +64,20 @@ class Family:
                 else:
                     pass
         #END: US13
+
+        #BEGIN: US14 - Multiple births less than 5
+        for child in self.children:
+            twinCount = 0
+            for child1 in self.children:
+                if child is child1:
+                    pass
+                elif child is not child1 and child.birthday == child1.birthday:
+                    twinCount += 1
+                else:
+                    pass
+        if twinCount > 4:           
+            print "ERROR: User Story 14 - More than 5 siblings were born on the same day."
+        #END: US14
         
         #BEGIN: US15 - Fewer than 15 siblings
         if len(self.children) >= 15:
@@ -80,6 +94,7 @@ class Family:
                 elif child1.name.partition(' ')[0] == child2.name.partition(' ')[0] and child1.birthday == child2.birthday:
                     print "ERROR: User story 25 - child " + child1.id + " and child " + child2.id + " share the same first name and birthday."
         #END: US25
+
 
     def addMarried(self, date):
         marriage_date = datetime.datetime.strptime(" ".join(date), '%d %b %Y').date()
@@ -472,7 +487,7 @@ def readGEDCOM(filename):
     print
     
 
-('gedcom_test_files/all_us_sprint3.ged')
+readGEDCOM('gedcom_test_files/all_us_sprint3.ged')
 
         
 #readGEDCOM('GEDCOMFile.ged')
@@ -485,6 +500,7 @@ def readGEDCOM(filename):
 #readGEDCOM('gedcom_test_files/us10.ged')
 #readGEDCOM('gedcom_test_files/us11.ged')
 #readGEDCOM('gedcom_test_files/us13.ged')
+#readGEDCOM('gedcom_test_files/us14.ged')
 #readGEDCOM('gedcom_test_files/us15.ged')
 #readGEDCOM('gedcom_test_files/us17.ged')
 #readGEDCOM('gedcom_test_files/us21.ged')
