@@ -91,6 +91,12 @@ class Family:
         if(isAfterDate(marriage_date, today)):
             print "ERROR: User story 1 - Marriage date " + str(marriage_date) + " for family " + self.id + " after today's date"
         #END: US01
+        #BEGIN: US10 - Marriage after 14
+        if ((marriage_date - self.husband.birthday).days/365.0) <= 14:
+            print "ERROR: User story 10 - " + self.husband.name + " has a marriage date before he turns 14 years old"
+        if ((marriage_date - self.wife.birthday).days/365.0) <= 14:
+            print "ERROR: User story 10 - " + self.wife.name + " has a marriage date before she turns 14 years old"  
+        #END: US10
         self.married = marriage_date
         
     def addDivorced(self, date):
@@ -466,7 +472,9 @@ def readGEDCOM(filename):
     print
     
 
-readGEDCOM('gedcom_test_files/all_us_sprint3.ged')
+#readGEDCOM('gedcom_test_files/all_us_sprint3.ged')
+readGEDCOM('/Users/carlybean/Desktop/testGED.ged')
+
 
         
 #readGEDCOM('GEDCOMFile.ged')
