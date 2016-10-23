@@ -472,9 +472,7 @@ def readGEDCOM(filename):
     print
     
 
-#readGEDCOM('gedcom_test_files/all_us_sprint3.ged')
-readGEDCOM('/Users/carlybean/Desktop/testGED.ged')
-
+readGEDCOM('gedcom_test_files/all_us_sprint3.ged')
 
         
 #readGEDCOM('GEDCOMFile.ged')
