@@ -472,7 +472,7 @@ def readGEDCOM(filename):
     print
     
 
-readGEDCOM('gedcom_test_files/all_us_sprint3.ged')
+('gedcom_test_files/all_us_sprint3.ged')
 
         
 #readGEDCOM('GEDCOMFile.ged')
@@ -482,6 +482,7 @@ readGEDCOM('gedcom_test_files/all_us_sprint3.ged')
 #readGEDCOM('gedcom_test_files/us06.ged')
 #readGEDCOM('gedcom_test_files/us07.ged')
 #readGEDCOM('gedcom_test_files/us09.ged')
+#readGEDCOM('gedcom_test_files/us10.ged')
 #readGEDCOM('gedcom_test_files/us11.ged')
 #readGEDCOM('gedcom_test_files/us13.ged')
 #readGEDCOM('gedcom_test_files/us15.ged')
