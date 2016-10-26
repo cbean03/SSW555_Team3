@@ -361,6 +361,20 @@ def readGEDCOM(filename):
             continue   
     #END: US06
 
+    #BEGIN: US08 - Birth before marriage of parents
+    for fam in families:
+        for child in families[fam].children: 
+            if families[fam].married is not None: 
+                if child.birthday < families[fam].married:
+                    print "ERROR: User Story 8- Child", child.name, "born on", child.birthday, "and parents marriage occured later on", families[fam].married
+                else:
+                    continue
+            else:
+                continue
+        else:
+            continue
+    #END: US08
+
     #BEGIN: US09 - Death before child brith
     for fam in families: #Finding keys in dictionary.  Go throught the family first... Then go through the child list.
         for child in families[fam].children: #Use key to get family... next look at the family.
@@ -496,6 +510,7 @@ readGEDCOM('gedcom_test_files/all_us_sprint3.ged')
 #readGEDCOM('gedcom_test_files/us05.ged')
 #readGEDCOM('gedcom_test_files/us06.ged')
 #readGEDCOM('gedcom_test_files/us07.ged')
+#readGEDCOM('gedcom_test_files/us08.ged')
 #readGEDCOM('gedcom_test_files/us09.ged')
 #readGEDCOM('gedcom_test_files/us10.ged')
 #readGEDCOM('gedcom_test_files/us11.ged')
