@@ -220,9 +220,9 @@ def isAfterDate(date1, date2):
         return False
 
 
-#def ageINDI(bday):
-#    """Function:     ageINDI
-#       Purpose:      Returns age of individual in years
+#def yearsFromBirth(bday):
+#    """Function:     yearsFromBirth
+#       Purpose:      Years since an individual was born
 #       Parameters:   bday
 #       Return value: int
 #    """
@@ -451,6 +451,32 @@ def readGEDCOM(filename):
     #END: US12
     
 
+
+    #BEGIN: US16 - Male Last Names
+    for fam in families:
+        
+        husband = families[fam].husband
+        children = families[fam].children
+        
+        for child1 in children:
+            
+            if child1.name.split(' ')[-1] != husband.name.split(' ')[-1]:
+                    print "ERROR: User story 16 - ", child1.name, " has a different last name than " + husband.name
+            
+            for child2 in children:
+
+                if child1 is child2:
+                    pass
+
+                elif child1.sex != "M" or child2.sex != "M":
+                    pass
+
+                elif child1.name.split(' ')[-1] != child2.name.split(' ')[-1]:
+                    print "ERROR: User story 16 - ", child1.name, " has a different last name than " + child2.name
+    #END: US16
+                    
+
+    
     #Print out all loaded information for troubleshooting
     sorted_keys = natural_sort(individuals)
     for i in sorted_keys:
