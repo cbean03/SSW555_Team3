@@ -76,7 +76,7 @@ class Family:
                 else:
                     pass
         if twinCount > 4:           
-            print "ERROR: User Story 14 - More than 5 siblings were born on the same day."
+            print "ERROR: User Story 14 - More than 5 siblings in famliy " + self.id + " were born on the same day."
         #END: US14
         
         #BEGIN: US15 - Fewer than 15 siblings
