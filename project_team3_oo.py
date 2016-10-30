@@ -365,7 +365,7 @@ def readGEDCOM(filename):
     for fam in families:
         for child in families[fam].children: 
             if families[fam].married is not None: 
-                if child.birthday < families[fam].married:
+                if isAfterDate(families[fam].married, child.birthday):
                     print "ERROR: User Story 8- Child", child.name, "born on", child.birthday, "and parents marriage occured later on", families[fam].married
                 else:
                     continue
@@ -381,14 +381,14 @@ def readGEDCOM(filename):
             delta = datetime.timedelta(days=(9 * 30)) #9 months times 30 days.
             if families[fam].husband:
                 if families[fam].husband.death is not None: #If the husband didn't die, skip.
-                    if child.birthday > families[fam].husband.death - delta:
+                    if isAfterDate(families[fam].husband.death - delta, child.birthday):
                         print "ERROR: User Story 9 - Child born less than 9 months after father's death.  Dead father:",families[fam].husband.name,"  Child:",child.name
                     else:
                         continue
             if families[fam].wife:
                 if families[fam].wife.death is not None:  # If the wife is not dead, skip.
                     if child.birthday is not None: #If the child does not have a birthday, skip.
-                        if child.birthday > families[fam].wife.death: #If the child is not born before mother's death, skip.
+                        if isAfterDate(families[fam].wife.death, child.birthday): #If the child is not born before mother's death, skip.
                             print "ERROR: User Story 9 - Child born after mother's death.  Dead mother:",families[fam].wife.name,"  Child:",child.name
                         else:
                             continue
@@ -484,6 +484,21 @@ def readGEDCOM(filename):
             else:
                 continue
     #END: US12
+
+    #BEGIN: US02 - Birth before marriage
+    for indi in individuals:
+        if individuals[indi].famc != '':
+            if isAfterDate(individuals[indi].birthday, families[individuals[indi].famc].married):
+                print "ERROR: User story 2 - Individual " + individuals[indi].id + " birthday " + str(individuals[indi].birthday) + " after marriage date " + str(families[individuals[indi].famc].married)
+    #END: US02
+
+    #BEGIN: US04 - Marriage before divorce
+    for fam in families:
+        if isAfterDate(families[fam].married, families[fam].divorced):
+            print "ERROR: User story 4 - Family " + families[fam].id + " divorce date " + str(families[fam].divorced) + " is before marriage date " + str(families[fam].married)
+        if families[fam].divorced and not families[fam].married:
+            print "ERROR: User story 4 - Family " + families[fam].id + " has divorce date " + str(families[fam].divorced) + " without marriage."
+    #END: US04
     
 
     #Print out all loaded information for troubleshooting
@@ -506,7 +521,9 @@ readGEDCOM('gedcom_test_files/all_us_sprint3.ged')
         
 #readGEDCOM('GEDCOMFile.ged')
 #readGEDCOM('gedcom_test_files/us01.ged')
+#readGEDCOM('gedcom_test_files/us02.ged')
 #readGEDCOM('gedcom_test_files/us03.ged')
+#readGEDCOM('gedcom_test_files/us04.ged')
 #readGEDCOM('gedcom_test_files/us05.ged')
 #readGEDCOM('gedcom_test_files/us06.ged')
 #readGEDCOM('gedcom_test_files/us07.ged')
