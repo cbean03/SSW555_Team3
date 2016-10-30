@@ -64,6 +64,20 @@ class Family:
                 else:
                     pass
         #END: US13
+
+        #BEGIN: US14 - Multiple births less than 5
+        for child in self.children:
+            twinCount = 0
+            for child1 in self.children:
+                if child is child1:
+                    pass
+                elif child is not child1 and child.birthday == child1.birthday:
+                    twinCount += 1
+                else:
+                    pass
+        if twinCount > 4:           
+            print "ERROR: User Story 14 - More than 5 siblings in famliy " + self.id + " were born on the same day."
+        #END: US14
         
         #BEGIN: US15 - Fewer than 15 siblings
         if len(self.children) >= 15:
@@ -81,6 +95,7 @@ class Family:
                     print "ERROR: User story 25 - child " + child1.id + " and child " + child2.id + " share the same first name and birthday."
         #END: US25
 
+
     def addMarried(self, date):
         marriage_date = datetime.datetime.strptime(" ".join(date), '%d %b %Y').date()
         #BEGIN: US05 - Marriage before death
@@ -91,6 +106,12 @@ class Family:
         if(isAfterDate(marriage_date, today)):
             print "ERROR: User story 1 - Marriage date " + str(marriage_date) + " for family " + self.id + " after today's date"
         #END: US01
+        #BEGIN: US10 - Marriage after 14
+        if ((marriage_date - self.husband.birthday).days/365.0) <= 14:
+            print "ERROR: User story 10 - " + self.husband.name + " has a marriage date before he turns 14 years old"
+        if ((marriage_date - self.wife.birthday).days/365.0) <= 14:
+            print "ERROR: User story 10 - " + self.wife.name + " has a marriage date before she turns 14 years old"  
+        #END: US10
         self.married = marriage_date
         
     def addDivorced(self, date):
@@ -340,20 +361,34 @@ def readGEDCOM(filename):
             continue   
     #END: US06
 
+    #BEGIN: US08 - Birth before marriage of parents
+    for fam in families:
+        for child in families[fam].children: 
+            if families[fam].married is not None: 
+                if isAfterDate(families[fam].married, child.birthday):
+                    print "ERROR: User Story 8- Child", child.name, "born on", child.birthday, "and parents marriage occured later on", families[fam].married
+                else:
+                    continue
+            else:
+                continue
+        else:
+            continue
+    #END: US08
+
     #BEGIN: US09 - Death before child brith
     for fam in families: #Finding keys in dictionary.  Go throught the family first... Then go through the child list.
         for child in families[fam].children: #Use key to get family... next look at the family.
             delta = datetime.timedelta(days=(9 * 30)) #9 months times 30 days.
             if families[fam].husband:
                 if families[fam].husband.death is not None: #If the husband didn't die, skip.
-                    if child.birthday > families[fam].husband.death - delta:
+                    if isAfterDate(families[fam].husband.death - delta, child.birthday):
                         print "ERROR: User Story 9 - Child born less than 9 months after father's death.  Dead father:",families[fam].husband.name,"  Child:",child.name
                     else:
                         continue
             if families[fam].wife:
                 if families[fam].wife.death is not None:  # If the wife is not dead, skip.
                     if child.birthday is not None: #If the child does not have a birthday, skip.
-                        if child.birthday > families[fam].wife.death: #If the child is not born before mother's death, skip.
+                        if isAfterDate(families[fam].wife.death, child.birthday): #If the child is not born before mother's death, skip.
                             print "ERROR: User Story 9 - Child born after mother's death.  Dead mother:",families[fam].wife.name,"  Child:",child.name
                         else:
                             continue
@@ -449,6 +484,21 @@ def readGEDCOM(filename):
             else:
                 continue
     #END: US12
+
+    #BEGIN: US02 - Birth before marriage
+    for indi in individuals:
+        if individuals[indi].famc != '':
+            if isAfterDate(individuals[indi].birthday, families[individuals[indi].famc].married):
+                print "ERROR: User story 2 - Individual " + individuals[indi].id + " birthday " + str(individuals[indi].birthday) + " after marriage date " + str(families[individuals[indi].famc].married)
+    #END: US02
+
+    #BEGIN: US04 - Marriage before divorce
+    for fam in families:
+        if isAfterDate(families[fam].married, families[fam].divorced):
+            print "ERROR: User story 4 - Family " + families[fam].id + " divorce date " + str(families[fam].divorced) + " is before marriage date " + str(families[fam].married)
+        if families[fam].divorced and not families[fam].married:
+            print "ERROR: User story 4 - Family " + families[fam].id + " has divorce date " + str(families[fam].divorced) + " without marriage."
+    #END: US04
     
 
 
@@ -497,13 +547,18 @@ readGEDCOM('gedcom_test_files/all_us_sprint3.ged')
         
 #readGEDCOM('GEDCOMFile.ged')
 #readGEDCOM('gedcom_test_files/us01.ged')
+#readGEDCOM('gedcom_test_files/us02.ged')
 #readGEDCOM('gedcom_test_files/us03.ged')
+#readGEDCOM('gedcom_test_files/us04.ged')
 #readGEDCOM('gedcom_test_files/us05.ged')
 #readGEDCOM('gedcom_test_files/us06.ged')
 #readGEDCOM('gedcom_test_files/us07.ged')
+#readGEDCOM('gedcom_test_files/us08.ged')
 #readGEDCOM('gedcom_test_files/us09.ged')
+#readGEDCOM('gedcom_test_files/us10.ged')
 #readGEDCOM('gedcom_test_files/us11.ged')
 #readGEDCOM('gedcom_test_files/us13.ged')
+#readGEDCOM('gedcom_test_files/us14.ged')
 #readGEDCOM('gedcom_test_files/us15.ged')
 #readGEDCOM('gedcom_test_files/us17.ged')
 #readGEDCOM('gedcom_test_files/us21.ged')
