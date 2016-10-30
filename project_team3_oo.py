@@ -348,13 +348,13 @@ def readGEDCOM(filename):
                 if comph <= compare:
                     print "ERROR: User Story 6 - Husband, ", families[fam].husband.name, " was divorced after death." 
                 else:
-                    print "NO."
+                    continue
             if families[fam].wife.death is not None:
                 compw = families[fam].wife.death
                 if compw <= compare:
                     print "ERROR: User Story 6 - Wife, ", families[fam].wife.name, "  was divorced after death." 
                 else:
-                    print "NO."
+                    continue
             else:
                 continue
         else:
