@@ -1,0 +1,542 @@
+BEGIN: gedcom_test_files/all_us_sprint3.ged
+LIST: User Story 29 - The following individual is deceased: Mother Last
+LIST: User Story 29 - The following individual is deceased: Father Last
+ERROR: User story 1 - Birthday 2950-01-01 for individual I20 after today's date
+ERROR: User story 3 - Death date 2000-06-04 for individual I20 before individual's birth date 
+LIST: User Story 29 - The following individual is deceased: Grandpa Last
+ERROR: User story 1 - Death Date 2100-02-03 for individual I21 after today's date
+LIST: User Story 29 - The following individual is deceased: Grammy Last
+ERROR: User story 1 - Death Date 2100-02-03 for individual I22 after today's date
+LIST: User Story 29 - The following individual is deceased: Brother Last
+ERROR: User story 1 - Death Date 2100-02-03 for individual I23 after today's date
+LIST: User Story 29 - The following individual is deceased: Aunt Last
+LIST: User Story 29 - The following individual is deceased: Father US06A Last
+LIST: User Story 29 - The following individual is deceased: Wife US06B Last
+ERROR: User story 15 - Family should have fewer than 15 siblings. Number of Children: 15
+ERROR: User story 15 - Family should have fewer than 15 siblings. Number of Children: 16
+ERROR: User story 25 - child I18 and child I19 share the same first name and birthday.
+ERROR: User story 25 - child I19 and child I18 share the same first name and birthday.
+ERROR: User story 15 - Family should have fewer than 15 siblings. Number of Children: 17
+ERROR: User story 25 - child I18 and child I19 share the same first name and birthday.
+ERROR: User story 25 - child I19 and child I18 share the same first name and birthday.
+ERROR: User story 11 - A husband in family F2 is married to wife but was not divorced first.
+ERROR: User story 11 - A wife in family F2 is married to wife but was not divorced first.
+ERROR: User story 11 - A husband in family F3 is married to wife but was not divorced first.
+ERROR: User story 11 - A wife in family F3 is married to wife but was not divorced first.
+ERROR: User story 11 - A husband in family F4 is married to wife but was not divorced first.
+ERROR: User story 11 - A wife in family F4 is married to wife but was not divorced first.
+ERROR: User story 11 - A husband in family F5 is married to wife but was not divorced first.
+ERROR: User story 11 - A wife in family F5 is married to wife but was not divorced first.
+ERROR: User story 11 - A husband in family F6 is married to wife but was not divorced first.
+ERROR: User story 11 - A wife in family F6 is married to wife but was not divorced first.
+ERROR: User story 11 - A husband in family F7 is married to wife but was not divorced first.
+ERROR: User story 11 - A wife in family F7 is married to wife but was not divorced first.
+ERROR: User Story 14 - More than 5 siblings in famliy F7 were born on the same day.
+ERROR: User story 10 - Kanye West has a marriage date before he turns 14 years old
+ERROR: User story 10 - Taylor Swift has a marriage date before she turns 14 years old
+ERROR: User story 11 - A husband in family F100 is married to wife but was not divorced first.
+ERROR: User story 11 - A wife in family F100 is married to wife but was not divorced first.
+ERROR: User story 10 - Mikayla Bean has a marriage date before she turns 14 years old
+ERROR: User story 11 - A husband in family F200 is married to wife but was not divorced first.
+ERROR: User story 11 - A wife in family F200 is married to wife but was not divorced first.
+ERROR: User story 11 - A husband in family F201 is married to wife but was not divorced first.
+ERROR: User story 11 - A wife in family F201 is married to wife but was not divorced first.
+ERROR: User Story 6 - Husband,  Father US06A Last  was divorced after death.
+ERROR: User Story 6 - Wife,  Wife US06B Last   was divorced after death.
+ERROR: User Story 8- Child Wife 17 Last born on 1958-04-07 and parents marriage occured later on 1980-06-10
+ERROR: User Story 8- Child Carly Bean born on 1994-02-01 and parents marriage occured later on 1995-06-10
+ERROR: User Story 9 - Child born less than 9 months after father's death.  Dead father: Father Last   Child: Child16 Over-Thirty
+ERROR: User Story 9 - Child born after mother's death.  Dead mother: Mother Last   Child: Child16 Over-Thirty
+ERROR: User Story 9 - Child born less than 9 months after father's death.  Dead father: Grandpa Last   Child: Father Last
+ERROR: User Story 9 - Child born after mother's death.  Dead mother: Grammy Last   Child: Father Last
+ERROR: User Story 9 - Child born less than 9 months after father's death.  Dead father: Grandpa Last   Child: Brother Last
+ERROR: User Story 9 - Child born after mother's death.  Dead mother: Grammy Last   Child: Brother Last
+ERROR: User Story 9 - Child born less than 9 months after father's death.  Dead father: Brother Last   Child: Cousin Last
+ERROR: User Story 9 - Child born after mother's death.  Dead mother: Aunt Last   Child: Cousin Last
+ERROR: User story 7 - Birthday 1950-02-03 and death date 2100-02-03 for individual I21 makes them over 150 years old
+ERROR: User story 17 - The decendant  Southwest West is a spouse in the family  
+ERROR: User story 17 - The decendant  Child 17 Last is a spouse in the family  F5
+ERROR: User story 17 - The decendant  Wife 17 Last is a spouse in the family  F6
+ERROR: User story 17 - The decendant  Wife US06B Last is a spouse in the family  
+ERROR: User story 19 - Wife 17 Last is married to first cousin 
+ERROR: User story 19 - Cousin Last is married to first cousin 
+ERROR: User story 19 - Child14 Last is married to first cousin 
+ERROR: User story 21 -  Father 17 Last  has the wrong gender for role.  Husband is  F emale.
+ERROR: User story 21 -  Wife 17 Last  has the wrong gender for role.  Wife is  M ale.
+ERROR: User story 21 -  Wife 17 Last  has the wrong gender for role.  Wife is  M ale.
+ERROR: User story 21 -  Alison Stead  has the wrong gender for role.  Husband is  F emale.
+LIST: User Story 31 - Individual is Living / Single / Over Age 30: Child16 Over-Thirty
+ERROR: User story 23 - Individual I19 and I18 with birthday 2014-01-01 appear twice
+ERROR: User story 23 - Individual I18 and I19 with birthday 2014-01-01 appear twice
+ERROR: User story 12 - Mother: Grammy Last  is more than 60 years older than Child:  Father Last
+ERROR: User story 12 - Mother: Aunt Last  is more than 60 years older than Child:  Cousin Last
+ERROR: User story 2 - Individual I25 birthday 1994-02-01 after marriage date 1980-06-10
+ERROR: User story 4 - Family F4 has divorce date 1950-06-15 without marriage.
+ERROR: User story 4 - Family F5 divorce date 1979-06-10 is before marriage date 1980-06-10
+ERROR: User story 16 -  Child1 Last  has a different last name than Child16 Over-Thirty
+ERROR: User story 16 -  Child2 Last  has a different last name than Child16 Over-Thirty
+ERROR: User story 16 -  Child3 Last  has a different last name than Child16 Over-Thirty
+ERROR: User story 16 -  Child4 Last  has a different last name than Child16 Over-Thirty
+ERROR: User story 16 -  Child5 Last  has a different last name than Child16 Over-Thirty
+ERROR: User story 16 -  Child6 Last  has a different last name than Child16 Over-Thirty
+ERROR: User story 16 -  Child7 Last  has a different last name than Child16 Over-Thirty
+ERROR: User story 16 -  Child8 Last  has a different last name than Child16 Over-Thirty
+ERROR: User story 16 -  Child9 Last  has a different last name than Child16 Over-Thirty
+ERROR: User story 16 -  Child10 Last  has a different last name than Child16 Over-Thirty
+ERROR: User story 16 -  Child11 Last  has a different last name than Child16 Over-Thirty
+ERROR: User story 16 -  Child12 Last  has a different last name than Child16 Over-Thirty
+ERROR: User story 16 -  Child13 Last  has a different last name than Child16 Over-Thirty
+ERROR: User story 16 -  Child14 Last  has a different last name than Child16 Over-Thirty
+ERROR: User story 16 -  Child15 Last  has a different last name than Child16 Over-Thirty
+ERROR: User story 16 -  Child15 Last  has a different last name than Child16 Over-Thirty
+ERROR: User story 16 -  Child16 Over-Thirty  has a different last name than Father Last
+ERROR: User story 16 -  Child16 Over-Thirty  has a different last name than Child1 Last
+ERROR: User story 16 -  Child16 Over-Thirty  has a different last name than Child2 Last
+ERROR: User story 16 -  Child16 Over-Thirty  has a different last name than Child3 Last
+ERROR: User story 16 -  Child16 Over-Thirty  has a different last name than Child4 Last
+ERROR: User story 16 -  Child16 Over-Thirty  has a different last name than Child5 Last
+ERROR: User story 16 -  Child16 Over-Thirty  has a different last name than Child6 Last
+ERROR: User story 16 -  Child16 Over-Thirty  has a different last name than Child7 Last
+ERROR: User story 16 -  Child16 Over-Thirty  has a different last name than Child8 Last
+ERROR: User story 16 -  Child16 Over-Thirty  has a different last name than Child9 Last
+ERROR: User story 16 -  Child16 Over-Thirty  has a different last name than Child10 Last
+ERROR: User story 16 -  Child16 Over-Thirty  has a different last name than Child11 Last
+ERROR: User story 16 -  Child16 Over-Thirty  has a different last name than Child12 Last
+ERROR: User story 16 -  Child16 Over-Thirty  has a different last name than Child13 Last
+ERROR: User story 16 -  Child16 Over-Thirty  has a different last name than Child14 Last
+ERROR: User story 16 -  Child16 Over-Thirty  has a different last name than Child15 Last
+ERROR: User story 16 -  Child16 Over-Thirty  has a different last name than Child15 Last
+ERROR: User story 16 -  Carly Bean  has a different last name than Alison Stead
+I1: Child1 Last
+Gender: M
+Birthday: 1994-02-01
+Death: None
+Child of family: F1
+Spouse of family: 
+Age: 22
+
+I2: Mother Last
+Gender: F
+Birthday: 1958-04-07
+Death: 1994-06-30
+Child of family: 
+Spouse of family: F1
+Age: 36
+
+I3: Father Last
+Gender: M
+Birthday: 1958-05-01
+Death: 1993-05-01
+Child of family: F2
+Spouse of family: F1
+Age: 35
+
+I4: Child2 Last
+Gender: M
+Birthday: 2001-01-01
+Death: None
+Child of family: F1
+Spouse of family: 
+Age: 15
+
+I5: Child3 Last
+Gender: M
+Birthday: 2002-01-01
+Death: None
+Child of family: F1
+Spouse of family: 
+Age: 14
+
+I6: Child4 Last
+Gender: M
+Birthday: 2003-01-01
+Death: None
+Child of family: F1
+Spouse of family: 
+Age: 13
+
+I7: Child5 Last
+Gender: M
+Birthday: 2004-01-01
+Death: None
+Child of family: F1
+Spouse of family: 
+Age: 12
+
+I8: Child6 Last
+Gender: M
+Birthday: 2005-01-01
+Death: None
+Child of family: F1
+Spouse of family: 
+Age: 11
+
+I9: Child7 Last
+Gender: M
+Birthday: 2006-01-01
+Death: None
+Child of family: F1
+Spouse of family: 
+Age: 10
+
+I10: Child8 Last
+Gender: M
+Birthday: 2007-01-01
+Death: None
+Child of family: F1
+Spouse of family: 
+Age: 9
+
+I11: Child9 Last
+Gender: M
+Birthday: 2008-01-01
+Death: None
+Child of family: F1
+Spouse of family: 
+Age: 8
+
+I12: Child10 Last
+Gender: M
+Birthday: 2009-01-01
+Death: None
+Child of family: F1
+Spouse of family: 
+Age: 7
+
+I13: Child11 Last
+Gender: M
+Birthday: 2010-01-01
+Death: None
+Child of family: F1
+Spouse of family: 
+Age: 6
+
+I14: Child12 Last
+Gender: M
+Birthday: 2011-01-01
+Death: None
+Child of family: F1
+Spouse of family: 
+Age: 5
+
+I15: Child13 Last
+Gender: M
+Birthday: 2012-01-01
+Death: None
+Child of family: F1
+Spouse of family: 
+Age: 4
+
+I16: Child14 Last
+Gender: M
+Birthday: 2013-01-01
+Death: None
+Child of family: F1
+Spouse of family: F3
+Age: 3
+
+I17: Cousin Last
+Gender: F
+Birthday: 2010-02-28
+Death: None
+Child of family: F4
+Spouse of family: F3
+Age: 6
+
+I18: Child15 Last
+Gender: M
+Birthday: 2014-01-01
+Death: None
+Child of family: F1
+Spouse of family: 
+Age: 2
+
+I19: Child15 Last
+Gender: M
+Birthday: 2014-01-01
+Death: None
+Child of family: F1
+Spouse of family: 
+Age: 2
+
+I20: Grandpa Last
+Gender: M
+Birthday: 2950-01-01
+Death: 2000-06-04
+Child of family: 
+Spouse of family: F2
+Age: -950
+
+I21: Grammy Last
+Gender: F
+Birthday: 1950-02-03
+Death: 2100-02-03
+Child of family: 
+Spouse of family: F2
+Age: 150
+
+I22: Brother Last
+Gender: M
+Birthday: 1956-02-28
+Death: 2100-02-03
+Child of family: F2
+Spouse of family: F4
+Age: 143
+
+I23: Aunt Last
+Gender: F
+Birthday: 1956-02-28
+Death: 2100-02-03
+Child of family: 
+Spouse of family: F4
+Age: 143
+
+I24: Child16 Over-Thirty
+Gender: M
+Birthday: 1980-01-01
+Death: None
+Child of family: F1
+Spouse of family: 
+Age: 36
+
+I25: Child 17 Last
+Gender: F
+Birthday: 1994-02-01
+Death: None
+Child of family: F5
+Spouse of family: F5
+Age: 22
+
+I26: Father 17 Last
+Gender: F
+Birthday: 1958-05-01
+Death: None
+Child of family: 
+Spouse of family: F5
+Age: 58
+
+I27: Wife 17 Last
+Gender: M
+Birthday: 1958-04-07
+Death: None
+Child of family: F6
+Spouse of family: F6
+Age: 58
+
+I28: Father 18 Last
+Gender: M
+Birthday: 1958-05-01
+Death: None
+Child of family: 
+Spouse of family: F6
+Age: 58
+
+I29: Taylor Swift
+Gender: F
+Birthday: 1984-02-01
+Death: None
+Child of family: 
+Spouse of family: F7
+Age: 32
+
+I30: Kanye West
+Gender: M
+Birthday: 1984-03-07
+Death: None
+Child of family: 
+Spouse of family: F8
+Age: 32
+
+I31: North West
+Gender: F
+Birthday: 2015-01-01
+Death: None
+Child of family: F7
+Spouse of family: 
+Age: 1
+
+I32: South West
+Gender: F
+Birthday: 2015-01-01
+Death: None
+Child of family: F7
+Spouse of family: 
+Age: 1
+
+I33: East West
+Gender: M
+Birthday: 2015-01-01
+Death: None
+Child of family: F7
+Spouse of family: 
+Age: 1
+
+I34: West West
+Gender: F
+Birthday: 2015-01-01
+Death: None
+Child of family: F7
+Spouse of family: 
+Age: 1
+
+I35: Northeast West
+Gender: F
+Birthday: 2015-01-01
+Death: None
+Child of family: F7
+Spouse of family: 
+Age: 1
+
+I36: Southeast West
+Gender: M
+Birthday: 2015-01-01
+Death: None
+Child of family: F7
+Spouse of family: 
+Age: 1
+
+I37: Southwest West
+Gender: M
+Birthday: 2015-01-02
+Death: None
+Child of family: 
+Spouse of family: 
+Age: 1
+
+I100: Carly Bean
+Gender: F
+Birthday: 1994-02-01
+Death: None
+Child of family: F100
+Spouse of family: 
+Age: 22
+
+I101: Sam Bean
+Gender: M
+Birthday: 1958-05-01
+Death: None
+Child of family: 
+Spouse of family: F100
+Age: 58
+
+I102: Alison Stead
+Gender: F
+Birthday: 1958-04-07
+Death: None
+Child of family: 
+Spouse of family: F100
+Age: 58
+
+I103: Mikayla Bean
+Gender: F
+Birthday: 1996-07-14
+Death: None
+Child of family: F100
+Spouse of family: 
+Age: 20
+
+I200: Father US06A Last
+Gender: M
+Birthday: 1958-05-01
+Death: 2007-12-29
+Child of family: 
+Spouse of family: F200
+Age: 49
+
+I201: Wife US06A Last
+Gender: F
+Birthday: 1958-04-07
+Death: None
+Child of family: 
+Spouse of family: F200
+Age: 58
+
+I202: Father US06B Last
+Gender: M
+Birthday: 1958-05-01
+Death: None
+Child of family: 
+Spouse of family: F201
+Age: 58
+
+I203: Wife US06B Last
+Gender: F
+Birthday: 1958-04-07
+Death: 2007-12-29
+Child of family: 
+Spouse of family: 
+Age: 49
+
+
+F1
+Married: None
+Divorced: None
+Husband: Father Last
+Wife: Mother Last
+Children: Child1 Last, Child2 Last, Child3 Last, Child4 Last, Child5 Last, Child6 Last, Child7 Last, Child8 Last, Child9 Last, Child10 Last, Child11 Last, Child12 Last, Child13 Last, Child14 Last, Child15 Last, Child15 Last, Child16 Over-Thirty
+
+F2
+Married: None
+Divorced: None
+Husband: Grandpa Last
+Wife: Grammy Last
+Children: Father Last, Brother Last
+
+F3
+Married: None
+Divorced: None
+Husband: Child14 Last
+Wife: Cousin Last
+Children: None
+
+F4
+Married: None
+Divorced: 1950-06-15
+Husband: Brother Last
+Wife: Aunt Last
+Children: Cousin Last
+
+F5
+Married: 1980-06-10
+Divorced: 1979-06-10
+Husband: Father 17 Last
+Wife: Wife 17 Last
+Children: Child 17 Last
+
+F6
+Married: 1980-06-10
+Divorced: None
+Husband: Father 18 Last
+Wife: Wife 17 Last
+Children: Wife 17 Last
+
+F7
+Married: 1994-05-04
+Divorced: None
+Husband: Kanye West
+Wife: Taylor Swift
+Children: North West, South West, East West, West West, Northeast West, Southeast West, Southwest West
+
+F100
+Married: 1995-06-10
+Divorced: None
+Husband: Alison Stead
+Wife: Mikayla Bean
+Children: Carly Bean
+
+F200
+Married: 1980-06-10
+Divorced: 2008-01-01
+Husband: Father US06A Last
+Wife: Wife US06A Last
+Children: None
+
+F201
+Married: 1980-06-10
+Divorced: 2008-01-01
+Husband: Father US06B Last
+Wife: Wife US06B Last
+Children: None
+
+END: gedcom_test_files/all_us_sprint3.ged
+
