@@ -524,9 +524,15 @@ def readGEDCOM(filename):
                 elif child1.name.split(' ')[-1] != child2.name.split(' ')[-1]:
                     print "ERROR: User story 16 - ", child1.name, " has a different last name than " + child2.name
     #END: US16
-                    
 
-    
+    #BEGIN: US20 - Aunts and uncles
+    for fam in families:
+        for childs1 in families[fam].children:
+            if childs1.fams != '':
+                if families[fam].wife.famc != families[fam].husband.famc:
+                    print "ERROR: User story 20-", childs1.name, " is married to an aunt or uncle."
+    #END: US20                    
+
     #Print out all loaded information for troubleshooting
     sorted_keys = natural_sort(individuals)
     for i in sorted_keys:
