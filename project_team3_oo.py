@@ -286,12 +286,20 @@ def readGEDCOM(filename):
                 elif parts[2] in tags0_id:
                     if parts[2] == 'INDI':
                         curr_indi = parts[1].replace("@","")
-                        individuals[curr_indi] = Individual(curr_indi)
+                        #BEGIN: US22 - Unique IDs
+                        if curr_indi in individuals:
+                            print "ERROR: User Story 22 - All individual IDs must be unique. Will not add second individual with ID:", curr_indi
+                        else:
+                            individuals[curr_indi] = Individual(curr_indi)
                         curr_fam = ''
                     else:
                         curr_fam = parts[1].replace("@","")
-                        families[curr_fam] = Family(curr_fam)
+                        if curr_fam in families:
+                            print "ERROR: User Story 22 - All family IDs must be unique. Will not add second family with ID:", curr_fam
+                        else:
+                            families[curr_fam] = Family(curr_fam)
                         curr_indi = ''
+                        #END: US22
                 else:
                     print("Invalid tag")
                     
@@ -576,6 +584,7 @@ readGEDCOM('gedcom_test_files/all_us_sprint3.ged')
 #readGEDCOM('gedcom_test_files/us15.ged')
 #readGEDCOM('gedcom_test_files/us17.ged')
 ##readGEDCOM('gedcom_test_files/us21.ged')
+#readGEDCOM('gedcom_test_files/us22.ged')
 #readGEDCOM('gedcom_test_files/us25.ged')
 #readGEDCOM('gedcom_test_files/us31.ged')
 
