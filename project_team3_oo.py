@@ -485,6 +485,14 @@ def readGEDCOM(filename):
                 continue
     #END: US12
 
+    #Begin: US18 - Siblings should not marry
+    for fam in families:
+        if families[fam].wife.famc != '' and (families[fam].wife.famc == families[fam].husband.famc):
+            print "ERROR: User story 18 - Siblings", families[fam].wife.name, "and", families[fam].husband.name, "are married";
+        else:
+            continue
+    #END: US18
+
     #BEGIN: US02 - Birth before marriage
     for indi in individuals:
         if individuals[indi].fams != '' and individuals[indi].fams in families:
@@ -567,7 +575,7 @@ readGEDCOM('gedcom_test_files/all_us_sprint3.ged')
 #readGEDCOM('gedcom_test_files/us14.ged')
 #readGEDCOM('gedcom_test_files/us15.ged')
 #readGEDCOM('gedcom_test_files/us17.ged')
-#readGEDCOM('gedcom_test_files/us21.ged')
+##readGEDCOM('gedcom_test_files/us21.ged')
 #readGEDCOM('gedcom_test_files/us25.ged')
 #readGEDCOM('gedcom_test_files/us31.ged')
 
