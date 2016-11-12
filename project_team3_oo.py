@@ -525,8 +525,7 @@ def readGEDCOM(filename):
     #BEGIN: US16 - Male Last Names
     for fam in families:
         
-        husband = families[fam].husband
-        children = families[fam].children
+        husband = families[fam].husband        children = families[fam].children
         
         for child1 in children:
             
@@ -535,7 +534,8 @@ def readGEDCOM(filename):
             
             for child2 in children:
 
-                if child1 is child2:
+
+			if child1 is child2:
                     pass
 
                 elif child1.sex != "M" or child2.sex != "M":
@@ -553,6 +553,13 @@ def readGEDCOM(filename):
                     addError("US20", "ERROR: User story 20 - " + childs1.name + " is married to an aunt or uncle.")
     #END: US20    
 
+    #BEGIN: US24 - Unique familes by spouses
+    for fam in families:
+        husbn = families[fam].husband.name
+        wifen = families[fam].wife.name
+        if husbn == wifen:
+            print addError("US24", "ERROR: User story 24 - Family " + families[fam].husband.fams + " and " + families[fam].wife.fams + " have spouses with the same name. Husband name: "+ husbn + " and wife name: " + wifen)
+    #END: US24  
 
     #Print out all errors in order
     sorted_errors = natural_sort(errors)
@@ -598,6 +605,7 @@ readGEDCOM('gedcom_test_files/all_us_sprint3.ged')
 #readGEDCOM('gedcom_test_files/us18.ged')
 ##readGEDCOM('gedcom_test_files/us21.ged')
 #readGEDCOM('gedcom_test_files/us22.ged')
+#readGEDCOM('gedcom_test_files/us24.ged')
 #readGEDCOM('gedcom_test_files/us25.ged')
 #readGEDCOM('gedcom_test_files/us31.ged')
 
