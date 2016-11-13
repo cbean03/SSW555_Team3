@@ -541,7 +541,7 @@ def readGEDCOM(filename):
     for indi in individuals:
         if individuals[indi].fams != '' and individuals[indi].fams in families:
             if isAfterDate(individuals[indi].birthday, families[individuals[indi].fams].married):
-                addError("US2", "ERROR: User story 2 - Individual " + individuals[indi].id + " birthday " + str(individuals[indi].birthday) + " after marriage date " + str(families[individuals[indi].famc].married))
+                addError("US2", "ERROR: User story 2 - Individual " + individuals[indi].id + " birthday " + str(individuals[indi].birthday) + " after marriage date " + str(families[individuals[indi].fams].married))
     #END: US02
 
     #BEGIN: US04 - Marriage before divorce
