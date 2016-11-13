@@ -1,5 +1,5 @@
 #Team3
-#This program shall read date from a GEDCOM file and store information for
+#This program shall read data from a GEDCOM file and store information for
 #individuals and families in lists
 import datetime, re
 
@@ -582,6 +582,7 @@ def readGEDCOM(filename):
     for indi in individuals:
         if not individuals[indi].death and individuals[indi].fams in families and families[individuals[indi].fams].married and not families[individuals[indi].fams].divorced:
             addError("US30", "LIST: User Story 30 - List living married: " + individuals[indi].name + " is living and married.")
+    #END: US30
 
     #Print out all errors in order
     sorted_errors = natural_sort(errors)
