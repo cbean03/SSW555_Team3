@@ -160,6 +160,25 @@ def bdayDiff(bday1, bday2):
         return True
     else:
         return False
+
+def listChildrenByAge(family, children):
+    """Function:     listChildrenByAge
+       Purpose:      Lists children of a family in order from oldest to youngest.
+       Parameters:   Receives the "children" array within a given family.
+       Return value: Void
+    """
+    ret = "LIST: User Story 28 - Order siblings by age - Family " + family.id + ": " 
+    while len(children) > 0:
+        oldest = children[0]
+        for child in children:
+            if age(child.birthday, child.death) > age(oldest.birthday, oldest.death):
+                oldest = child
+        if len(children) != 1:
+            ret += oldest.name + ", "
+        else:
+            ret += oldest.name
+        children.remove(oldest)
+    addError("US28", ret)
         
 #Class for holding individual information
 class Individual:
@@ -523,24 +542,17 @@ def readGEDCOM(filename):
 
 
     #BEGIN: US16 - Male Last Names
-    for fam in families:
-        
-        husband = families[fam].husband        children = families[fam].children
-        
-        for child1 in children:
-            
+    for fam in families:        
+        husband = families[fam].husband        
+        children = families[fam].children    
+        for child1 in children:  
             if child1.name.split(' ')[-1] != husband.name.split(' ')[-1]:
-                    addError("US16", "ERROR: User story 16 - " + child1.name + " has a different last name than " + husband.name)
-            
+                addError("US16", "ERROR: User story 16 - " + child1.name + " has a different last name than " + husband.name)       
             for child2 in children:
-
-
-			if child1 is child2:
+                if child1 is child2:
                     pass
-
                 elif child1.sex != "M" or child2.sex != "M":
                     pass
-
                 elif child1.name.split(' ')[-1] != child2.name.split(' ')[-1]:
                     addError("US16", "ERROR: User story 16 - " + child1.name + " has a different last name than " + child2.name)
     #END: US16
@@ -560,6 +572,16 @@ def readGEDCOM(filename):
         if husbn == wifen:
             print addError("US24", "ERROR: User story 24 - Family " + families[fam].husband.fams + " and " + families[fam].wife.fams + " have spouses with the same name. Husband name: "+ husbn + " and wife name: " + wifen)
     #END: US24  
+
+    #BEGIN: US28 - Order siblings by age
+    for fam in families:
+        listChildrenByAge(families[fam], families[fam].children)
+    #END: US28
+
+    #BEGIN: US30 - List living married
+    for indi in individuals:
+        if not individuals[indi].death and individuals[indi].fams in families and families[individuals[indi].fams].married and not families[individuals[indi].fams].divorced:
+            addError("US30", "LIST: User Story 30 - List living married: " + individuals[indi].name + " is living and married.")
 
     #Print out all errors in order
     sorted_errors = natural_sort(errors)
@@ -607,5 +629,6 @@ readGEDCOM('gedcom_test_files/all_us_sprint3.ged')
 #readGEDCOM('gedcom_test_files/us22.ged')
 #readGEDCOM('gedcom_test_files/us24.ged')
 #readGEDCOM('gedcom_test_files/us25.ged')
+#readGEDCOM('gedcom_test_files/us28.ged')
 #readGEDCOM('gedcom_test_files/us31.ged')
 
