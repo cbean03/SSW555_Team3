@@ -260,16 +260,29 @@ def isAfterDate(date1, date2):
     else:
         return False
 
+    
+def daysAlive(birthday):
+    """Function:     daysFromBirth
+       Purpose:      Days since an individual was born
+       Parameters:   birth
+       Return value: int
+    """
+    today = date.today()
+    daysAlive = today - birthday
+    return daysAlive.days
 
-#def yearsFromBirth(bday):
-#    """Function:     yearsFromBirth
-#       Purpose:      Years since an individual was born
-#       Parameters:   bday
-#       Return value: int
-#    """
-#    today = date.today()
-#    age = today.year - bday.year
-#    return age
+
+def daysDead(death):
+    """Function:     daysFromDeath
+       Purpose:      Days since an individual died
+       Parameters:   death
+       Return value: int
+    """
+    today = date.today()
+    if(death):
+        daysDead = today - death
+        return daysDead.days
+
 
 
 def age(birth, death):
@@ -583,6 +596,33 @@ def readGEDCOM(filename):
         if not individuals[indi].death and individuals[indi].fams in families and families[individuals[indi].fams].married and not families[individuals[indi].fams].divorced:
             addError("US30", "LIST: User Story 30 - List living married: " + individuals[indi].name + " is living and married.")
     #END: US30
+    
+    
+    
+    #Begin: US35 - List Recent Births
+    for indi in individuals:
+        if daysAlive(individuals[indi].birthday) >= 0 and daysAlive(individuals[indi].birthday) <=30:
+            addError("US35", "LIST: User Story 35 - Individual " + individuals[indi].name + " was born in the last 30 days")
+        else:
+            continue
+    #END: US35
+    
+    
+    #Begin: US36 - List Recent Deaths
+    for indi in individuals:
+        if individuals[indi].death is 'none':
+            pass
+        elif daysDead(individuals[indi].death) >= 0 and daysDead(individuals[indi].death) <=30:
+            addError("US36", "LIST: User Story 36 - Individual " + individuals[indi].name + " died in the last 30 days")
+        else:
+            continue
+    #END: US36
+    
+
+    
+    
+    
+    
 
     #Print out all errors in order
     sorted_errors = natural_sort(errors)
@@ -606,7 +646,7 @@ def readGEDCOM(filename):
     print
     
 
-readGEDCOM('gedcom_test_files/all_us_sprint3.ged')
+readGEDCOM('gedcom_test_files/all_us_sprint4.ged')
 
         
 #readGEDCOM('GEDCOMFile.ged')
