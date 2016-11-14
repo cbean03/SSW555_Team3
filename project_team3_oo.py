@@ -90,7 +90,7 @@ class Family:
         #BEGIN: US25 - Unique first names in families
         for child1 in self.children:
             for child2 in self.children:
-                if child1 is child2:
+                if child1.id == child2.id:
                     continue
                 elif child1.name.partition(' ')[0] == child2.name.partition(' ')[0] and child1.birthday == child2.birthday:
                     addError("US25", "ERROR: User story 25 - child " + child1.id + " and child " + child2.id + " share the same first name and birthday.")
@@ -139,7 +139,7 @@ class Family:
         else:
             print "Wife: None"
         print "Children:",
-        if self.children == []:
+        if len(self.children) == 0:
             print "None"
         else:
             for child in self.children:
@@ -167,17 +167,18 @@ def listChildrenByAge(family, children):
        Parameters:   Receives the "children" array within a given family.
        Return value: Void
     """
-    ret = "LIST: User Story 28 - Order siblings by age - Family " + family.id + ": " 
-    while len(children) > 0:
-        oldest = children[0]
-        for child in children:
+    ret = "LIST: User Story 28 - Order siblings by age - Family " + family.id + ": "
+    tmp = children[:]
+    while len(tmp) > 0:
+        oldest = tmp[0]
+        for child in tmp:
             if age(child.birthday, child.death) > age(oldest.birthday, oldest.death):
                 oldest = child
-        if len(children) != 1:
+        if len(tmp) != 1:
             ret += oldest.name + ", "
         else:
             ret += oldest.name
-        children.remove(oldest)
+        tmp.remove(oldest)
     addError("US28", ret)
         
 #Class for holding individual information
@@ -617,12 +618,6 @@ def readGEDCOM(filename):
         else:
             continue
     #END: US36
-    
-
-    
-    
-    
-    
 
     #Print out all errors in order
     sorted_errors = natural_sort(errors)
